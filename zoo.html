@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var Human = function (humanParametrs) {
+                this.humanParametrs=humanParametrs;
+            }
+        var humanParametrs = function (name,age,waight){
+            name: "name",
+            age:"age",
+            waight:"waight"
+        }
+        Human.prototype.species = "Homo sapiens";
+        Human.prototype.aboutMe = function(){
+                console.log("Hi my name is "+this.name+" I am "+this.age+" years old"+" my waight is "+this.waight+" kilogmams");
+        }
+        Human.prototype.ageDifference=function(){
+            if (this.age<=14) {
+                console.log("I am a child");
+            }
+            else if (this.age>14&&this.age<=18){
+                console.log("I am teenage");
+            }
+            else if (this.age>18&&this.age<=50){
+                console.log("I am adalt");
+            }
+            else if (this.age>50){
+                console.log("I am old");
+            }
+        }
+        Human.prototype.walk= function(){
+            if (this.walking===true){
+                console.log(this.name+" is already walking");
+            }
+            else {
+                this.walking=true;
+                console.log(this.name+" is now walking");
+            }
+        }
+        Human.prototype.stopWalking =function(){
+            if (this.walking===true){
+                console.log("Ok I stop walking. Now I am standing");
+                this.walking=false;
+            }
+            else{
+                console.log("I am not walking.");
+            }
+        }
+        Human.prototype.sit = function(){
+            if (this.walking===true){
+                console.log("I cant sit becouse I am walking");
+            }
+            else{
+                
+                console.log("Ok I setdown");
+                this.setdown=true;
+            }
+        }
+        Human.prototype.eat=function(){
+            if (this.setdown===true){
+                console.log("I am eating");
+                this.eat=true;
+            }
+            else{
+                console.log("I cant it until I sitdown");
+            }
+        }
+        Human.prototype.think = function(){
+            if (this.eat===true){
+                console.log("I am thinking");
+            }
+            else{
+                console.log("I cant think until I eat");
+            }
+        }
+        var SayHi=false;
+        var self1;
+        Human.prototype.sayHiTo=function(who){
+            console.log("Hi "+who.name);
+            var name=this.name;
+            SayHi=true;
+            self1=this;
+        setTimeout(function(){
+            
+                console.log("Hello "+name);
+            console.log("How are u?");
+            
+            
+            
+        },2000);
+            setTimeout(function(){
+                who.Mood()
+            },5000);
+        }
+        Human.prototype.Mood=function(mood){
+            var mood=this.mood;
+//            var name=this.name;
+            if (SayHi===true){
+            console.log("I am "+mood+" "+self1.name);
+                
+                if (mood==="bad"){
+                    console.log("I need nerse");
+                    nerse1.treat(this);
+                }
+            console.log("And how are u doing?");
+            setTimeout(function(){
+                
+            console.log("I am "+self1.mood);
+                if (self1.mood==="bad"){
+                    console.log("I need a nerse");
+                    nerse1.treat(self1);
+                }
+            },2000); 
+                SayHi=false;
+            }
+            else if (this.mood==="bad"){
+                console.log("I am "+mood);
+                console.log("I need a nurse");
+            }
+            else{
+                console.log("I am "+mood);
+            }
+        }
+        var Woman = function (humanParametrs) {
+            Human.call(this,humanParametrs);
+            this.gender = function(){
+                return "feemale";
+            }
+        }
+        Woman.prototype = new Human();
+        Woman.prototype.cook= function(){
+            this.cook=true;
+            console.log("I am cooking");
+        }
+        Woman.prototype.constructor = Woman;
+        
+        var person1 = new Woman();
+        person1.humanParametrs = "Laura";
+        person1.age = 26;
+        person1.waight = 60;
+        console.log(person1.ageDifference());
+       console.log(person1.age);
+        console.log(person1.name);
+        console.log(person1.aboutMe());
+        console.log(person1.species);
+        console.log(person1.walk());
+        console.log(person1.walk());
+        if (person1 instanceof Human){
+            console.log("Person1 is a Human");
+        }
+        person1.mood="ok";
+        var person2 = new Woman();
+        person1()
+        person2.name="Liza";
+        person2.age=32;
+        person2.waight=75;
+        person2.mood="bad";
+        console.log(person2.aboutMe());
+        if (person2 instanceof Human){
+            console.log("I am woman");
+        }
+        console.log(person1.gender());
+        console.log("Person1 constructor is "+person1.constructor);
+        var Librarian= function(humanParametrs){
+            Human.apply(this,humanParametrs);
+            this.age=50;
+        }
+        
+        Librarian.prototype = new Woman();
+        Librarian.prototype.count=function(){
+            console.log("I can count animals or people");
+        }
+        Librarian.prototype.constructor=Librarian;
+        var librarian1=new Librarian();
+        
+       var Nerse = function(humanParametrs){
+            Human.apply(this,humanParametrs);
+            
+        }
+       Nerse.prototype= new Woman();
+        Nerse.prototype.constructor=Nerse;
+        Nerse.prototype.treat=function(people){
+            console.log("Hi my name is "+this.name+" I am hear to help u");
+            if (people.mood==="bad"){
+           console.log(" I am here "+people.name+" I give u a peal and u gonna be ok");
+                
+            people.mood="better";
+                setTimeout(function(){
+                    
+            console.log(people.name+" feels "+people.mood );
+                },3000);
+            }
+            else {
+                console.log ("Ow! You dont look like a seak");
+            }
+           
+       }
+       var nerse1=new Nerse();
+        nerse1.name="Nina";
+       var Men = function(humanParametrs){
+            Human.apply(this,humanParametrs);
+            
+        }
+       Men.prototype=new Human();
+        Men.prototype.constructor=Men;
+        Men.prototype.cary=function(smth){
+            console.log("I am caring "+smth);
+        }
+        var Workers= function(humanParametrs){
+            Human.apply(this,humanParametrs);
+            
+        }
+        Workers.prototype=new Men();
+        Workers.prototype.constructor=Workers;
+        Workers.prototype.feedAnimals=function(animal,food){
+            
+        }
+        var Hunter=function(humanParametrs){
+            Human.apply(this,humanParametrs);
+            
+        }
+        Hunter.prototype=new Men();
+        Hunter.prototype.constructor=Hunter;
+        var self;
+        Hunter.prototype.hunt=function(animal){
+            self= this.name;
+            console.log(this.name+ " kill "+animal.name);
+            animal.beenKilled(self);
+        }
+        var worker1=new Workers();
+        worker1.name="Willy";
+        worker1.age=30;
+        worker1.mood="ok";
+        var hunter1= new Hunter();
+        hunter1.name="Homer";
+        hunter1.age=25;
+        hunter1.mood="bad";
+        
+        
+        
+        var Animals=function(name,age,sound){
+            name=this.name;
+            age= this.age;
+            sound=this.sound;
+        }
+        Animals.prototype.run=function(){
+            console.log("Look "+this.name+" is runing");
+        }
+        
+        var Herbivorous=function(){
+            
+           this.eat="herbs";
+            
+        }
+        Herbivorous.prototype=new Animals();
+        Herbivorous.prototype.constructor=Herbivorous;
+        Herbivorous.prototype.beenKilled=function(self){
+            console.log(this.name+" have been killed by "+self);
+            delete(this.name);//як стерти цілий обєкт?
+        }
+        var herbivorous1=new Herbivorous();
+        herbivorous1.name="rabit";
+        herbivorous1.age="2";
+    </script>
+
+</body>
+
+</html>
